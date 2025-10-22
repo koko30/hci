@@ -1,0 +1,38 @@
+import streamlit as st
+import pandas as pd
+import altair as alt
+from pathlib import Path
+
+# --- Page setup ---
+st.set_page_config(page_title="Shifting Narratives", page_icon="🌍", layout="centered")
+
+# --- Load data ---
+data_path = Path("data/events.csv")
+if data_path.exists():
+    df = pd.read_csv(data_path)
+else:
+    # If no CSV file found, use example data
+    df = pd.DataFrame({
+        "event_name": ["Climate Summit","Climate Summit","AI Regulation","AI Regulation","World Cup Final","World Cup Final"],
+        "stakeholder": ["Government","Media","Government","Media","Public","Media"],
+        "text_summary": [
+            "Focuses on cooperation and policy agreements.",
+            "Highlights protests and controversies.",
+            "Emphasizes innovation and safety.",
+            "Raises questions about motives and privacy.",
+            "Celebrates unity and friendly rivalry.",
+            "Debates referee decisions and drama."
+        ],
+        "sentiment": [0.6,-0.3,0.4,-0.2,0.5,-0.1],
+        ],
+        "stakeholder": ["Government","Media","Government","Media","Public","Media"],
+        "text_summary": [
+            "Focuses on cooperation and policy agreements.",
+            "Highlights protests and controversies.",
+            "Emphasizes innovation and safety.",
+            "Raises questions about motives and privacy.",
+            "Celebrates unity and friendly rivalry.",
+            "Debates referee decisions and drama."
+        ],
+        "sentiment": [0.6,-0.3,0.4,-0.2,0.5,-0.1],
+        
