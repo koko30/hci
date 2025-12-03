@@ -211,6 +211,7 @@ st.altair_chart(time_chart, use_container_width=True)
 # -------------------------------------------------
 if comparison_mode:
 
+    # Bar chart: sentiment by stakeholder for selected event
     st.markdown("### Sentiment Comparison For Selected Event")
 
     bar_chart = (
@@ -226,22 +227,55 @@ if comparison_mode:
     )
     st.altair_chart(bar_chart, use_container_width=True)
 
-    st.markdown("### Emotional Intensity For Selected Event")
+    # Emotional intensity pies: percentage contribution within each sentiment
+    st.markdown("### Emotional Intensity By Sentiment And Stakeholder")
 
     pie_df = event_df.copy()
     pie_df["sentiment_intensity"] = pie_df["sentiment"].abs()
 
+    grouped = (
+        pie_df
+        .groupby(["sentiment_category", "stakeholder"], as_index=False)["sentiment_intensity"]
+        .sum()
+    )
+
+    grouped["total_in_category"] = grouped.groupby("sentiment_category")["sentiment_intensity"].transform("sum")
+    grouped["share"] = grouped["sentiment_intensity"] / grouped["total_in_category"]
+
     pie_chart = (
-        alt.Chart(pie_df)
+        alt.Chart(grouped)
         .mark_arc(innerRadius=40)
         .encode(
-            theta="sentiment_intensity:Q",
-            color=alt.Color("sentiment_category:N", title="Sentiment", scale=sentiment_color_scale),
-            tooltip=["stakeholder", "sentiment", "sentiment_category"]
+            theta=alt.Theta("share:Q", title="Share Within Sentiment", stack=True),
+            color=alt.Color("stakeholder:N", title="Stakeholder"),
+            tooltip=[
+                "sentiment_category:N",
+                "stakeholder:N",
+                alt.Tooltip("share:Q", title="Share of sentiment", format=".0%"),
+                alt.Tooltip("sentiment_intensity:Q", title="Intensity")
+            ]
         )
-        .properties(width=350, height=350)
+        .facet(
+            column=alt.Column("sentiment_category:N", title="Sentiment")
+        )
+        .properties(
+            width=160,
+            height=160,
+            title=f"Stakeholder Contribution Within Each Sentiment For “{event}”"
+        )
     )
-    st.altair_chart(pie_chart, use_container_width=False)
+
+    st.altair_chart(pie_chart, use_container_width=True)
+
+    st.markdown(
+        """
+        <div style='font-size:16px; margin-top:4px;'>
+        Each pie represents one sentiment type (Positive, Neutral, Negative).<br>
+        The slices inside a pie show how much each stakeholder contributes to that sentiment for this event, as a percentage.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # -------------------------------------------------
 # End Interaction
