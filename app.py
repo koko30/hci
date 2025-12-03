@@ -167,7 +167,7 @@ st.markdown(
 )
 
 # -------------------------------------------------
-# Color Legend (Moved BELOW Summary & ABOVE Charts)
+# Color Legend (Below Summary, Above Charts)
 # -------------------------------------------------
 st.markdown(
     """
@@ -180,16 +180,16 @@ st.markdown(
 )
 
 # -------------------------------------------------
-# Timeline Chart
+# Timeline Chart (Focused On Selected Event)
 # -------------------------------------------------
-st.markdown("### Event Timeline")
+st.markdown("### Timeline For Selected Event")
 
 timeline = (
-    alt.Chart(df)
-    .mark_circle(size=140)
+    alt.Chart(event_df)
+    .mark_circle(size=160)
     .encode(
         x=alt.X("date:T", title="Date"),
-        y=alt.Y("event_name:N", title="Event"),
+        y=alt.Y("stakeholder:N", title="Stakeholder"),
         color="stakeholder:N",
         tooltip=["event_name", "stakeholder", "sentiment"]
     )
