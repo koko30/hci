@@ -1,10 +1,20 @@
 event_name,stakeholder,text_summary,sentiment,keywords,date
 Climate Summit,Government,Government stresses cooperation and long-term climate agreements.,0.45,"agreement, targets, cooperation",2023-11-15
-Climate Summit,Media,Media emphasizes mixed reactions and different negotiation outcomes.,0.02,"reactions, negotiation, outcomes",2023-11-15
+Climate Summit,Media,Media highlights mixed reactions and different negotiation outcomes.,0.05,"reactions, negotiation, outcomes",2023-11-15
 Climate Summit,Public,Public expresses hope but also frustration about slow progress.,-0.18,"hope, frustration, progress",2023-11-15
-AI Regulation,Government,Government highlights AI innovation and safety frameworks.,0.32,"innovation, safety, framework",2024-02-10
-AI Regulation,Media,Media reports on heated debates about regulation speed.,-0.22,"risk, debate, speed",2024-02-10
-AI Regulation,Public,Public discussions show uncertainty and cautious optimism.,0.00,"uncertainty, optimism, discussion",2024-02-10
-World Cup Final,Government,Government congratulates athletes and focuses on national pride.,0.52,"pride, celebration, unity",2022-12-18
+
+AI Regulation,Government,Government presents AI innovation and safety frameworks.,0.32,"innovation, safety, framework",2024-02-10
+AI Regulation,Media,Media reports on heated debates about regulation speed.,-0.22,"debate, risk, oversight",2024-02-10
+AI Regulation,Public,Public reactions show uncertainty and cautious optimism.,0.00,"uncertainty, optimism, concern",2024-02-10
+
+World Cup Final,Government,Government congratulates athletes and praises sportsmanship.,0.52,"pride, celebration, unity",2022-12-18
 World Cup Final,Media,Media covers intense match moments and controversial decisions.,-0.14,"drama, controversy, intensity",2022-12-18
-World Cup Final,Public,Public reactions include excitement and a calm appreciation of the match.,0.03,"reaction, appreciation, calm",2022-12-18
+World Cup Final,Public,Public shares excitement but also calm appreciation.,0.03,"reaction, appreciation, enthusiasm",2022-12-18
+
+Tech Layoffs,Government,Government comments on economic impact and workforce transitions.,-0.08,"economy, job-loss, transition",2023-09-04
+Tech Layoffs,Media,Media focuses on sudden layoffs and market volatility.,-0.25,"volatility, layoffs, reaction",2023-09-04
+Tech Layoffs,Public,Public shares mixed opinions about working conditions.,0.07,"conditions, fairness, opinion",2023-09-04
+
+Mars Mission Launch,Government,Government celebrates scientific achievement and international cooperation.,0.48,"science, cooperation, success",2024-07-21
+Mars Mission Launch,Media,Media highlights both excitement and the mission's high risks.,0.02,"risk, mission, anticipation",2024-07-21
+Mars Mission Launch,Public,Public expresses fascination and pride but also questions costs.,-0.06,"curiosity, pride, cost",2024-07-21

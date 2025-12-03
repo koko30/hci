@@ -108,9 +108,7 @@ mood_adjust = st.sidebar.slider(
     step=0.05
 )
 
-comparison_mode = st.sidebar.checkbox(
-    "Enable Comparison Mode",
-)
+comparison_mode = st.sidebar.checkbox("Enable Comparison Mode")
 
 # -------------------------------------------------
 # Event Filtering
@@ -130,22 +128,13 @@ row_sentiment = float(row["sentiment"])
 row_category = label_sentiment(row_sentiment)
 
 # -------------------------------------------------
-# Header Section
+# Header
 # -------------------------------------------------
 st.title("Shifting Narratives")
 st.subheader(f"{effective_stakeholder} Perspective On “{event}”")
 
-st.markdown(
-    """
-### Color Meaning  
-🟢 Green = Positive  
-⚪ Grey = Neutral  
-🔴 Red = Negative  
-"""
-)
-
 # -------------------------------------------------
-# Main Summary Display
+# Summary (Bigger Text)
 # -------------------------------------------------
 if row_category == "Positive":
     sent_color = "#2ca02c"
@@ -156,8 +145,8 @@ else:
 
 st.markdown(
     f"""
-<div style='padding:12px;border-radius:10px;background:#f5f5f5;'>
-  <b>Summary ({effective_stakeholder}):</b> {row['text_summary']}
+<div style='padding:18px;border-radius:10px;background:#f5f5f5;font-size:22px;line-height:1.5;'>
+  <b>Summary ({effective_stakeholder}):</b><br>{row['text_summary']}
 </div>
 """,
     unsafe_allow_html=True,
@@ -165,14 +154,30 @@ st.markdown(
 
 st.markdown(
     f"""
-<div style='margin-top:8px;color:{sent_color};font-weight:bold;'>
+<div style='margin-top:10px;color:{sent_color};font-weight:bold;font-size:20px;'>
   Sentiment: {row_sentiment:.2f} ({row_category})
 </div>
 """,
     unsafe_allow_html=True,
 )
 
-st.write(f"**Keywords:** {row['keywords']}")
+st.markdown(
+    f"<div style='font-size:18px;margin-top:10px;'><b>Keywords:</b> {row['keywords']}</div>",
+    unsafe_allow_html=True
+)
+
+# -------------------------------------------------
+# Color Legend (Moved BELOW Summary & ABOVE Charts)
+# -------------------------------------------------
+st.markdown(
+    """
+### Color Meaning  
+🟢 <span style='font-size:18px;'>Green = Positive</span><br>
+⚪ <span style='font-size:18px;'>Grey = Neutral</span><br>
+🔴 <span style='font-size:18px;'>Red = Negative</span>
+""",
+    unsafe_allow_html=True
+)
 
 # -------------------------------------------------
 # Timeline Chart
@@ -181,7 +186,7 @@ st.markdown("### Event Timeline")
 
 timeline = (
     alt.Chart(df)
-    .mark_circle(size=120)
+    .mark_circle(size=140)
     .encode(
         x=alt.X("date:T", title="Date"),
         y=alt.Y("event_name:N", title="Event"),
@@ -197,7 +202,6 @@ st.altair_chart(timeline, use_container_width=True)
 # -------------------------------------------------
 if comparison_mode:
 
-    # Sentiment Bar Chart
     st.markdown("### Sentiment Comparison")
 
     bar_chart = (
@@ -205,7 +209,7 @@ if comparison_mode:
         .mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8)
         .encode(
             x=alt.X("stakeholder:N", title="Stakeholder"),
-            y=alt.Y("sentiment:Q", title="Sentiment Score", scale=alt.Scale(domain=[-0.6, 0.6])),
+            y=alt.Y("sentiment:Q", title="Score", scale=alt.Scale(domain=[-0.6, 0.6])),
             color=alt.Color("sentiment_category:N", title="Sentiment", scale=sentiment_color_scale),
             tooltip=["stakeholder", "sentiment", "sentiment_category"]
         )
@@ -213,7 +217,6 @@ if comparison_mode:
     )
     st.altair_chart(bar_chart, use_container_width=True)
 
-    # Pie Chart for Intensity
     st.markdown("### Emotional Intensity")
 
     pie_df = event_df.copy()
@@ -223,7 +226,7 @@ if comparison_mode:
         alt.Chart(pie_df)
         .mark_arc(innerRadius=40)
         .encode(
-            theta=alt.Theta("sentiment_intensity:Q", title="Intensity"),
+            theta="sentiment_intensity:Q",
             color=alt.Color("sentiment_category:N", title="Sentiment", scale=sentiment_color_scale),
             tooltip=["stakeholder", "sentiment", "sentiment_category"]
         )
@@ -232,7 +235,7 @@ if comparison_mode:
     st.altair_chart(pie_chart, use_container_width=False)
 
 # -------------------------------------------------
-# Small End Interaction
+# End Interaction
 # -------------------------------------------------
 st.markdown("---")
 if st.button("Done Exploring 🎉"):
