@@ -201,7 +201,7 @@ if comparison_mode:
     # -------------------------------------------------
     # NEW CHART: Convert Sentiment Weight Into Percentages
     # -------------------------------------------------
-    st.markdown("### Overall Emotional Weight (Converted to Percent)")
+    st.markdown("### Overall Emotional Weight")
 
     weight_df = event_df.copy()
     weight_df["intensity"] = weight_df["sentiment"].abs()
