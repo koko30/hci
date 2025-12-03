@@ -70,7 +70,7 @@ df["date"] = pd.to_datetime(df["date"])
 # -------------------------------------------------
 # Sentiment Categorization
 # -------------------------------------------------
-def label_sentiment(s: float) -> str:
+def label_sentiment(s):
     if s > 0.05:
         return "Positive"
     elif s < -0.05:
@@ -102,16 +102,13 @@ stakeholder_choice = st.sidebar.radio(
 
 mood_adjust = st.sidebar.slider(
     "Adjust Sentiment Intensity",
-    min_value=-0.5,
-    max_value=0.5,
-    value=0.0,
-    step=0.05
+    -0.5, 0.5, 0.0, 0.05
 )
 
 comparison_mode = st.sidebar.checkbox("Enable Comparison Mode")
 
 # -------------------------------------------------
-# Event Filtering
+# Filter Event Data
 # -------------------------------------------------
 event_df = df[df["event_name"] == event].copy()
 event_df["sentiment"] = event_df["sentiment"] + mood_adjust
@@ -119,68 +116,51 @@ event_df["sentiment_category"] = event_df["sentiment"].apply(label_sentiment)
 
 if stakeholder_choice in event_df["stakeholder"].unique():
     row = event_df[event_df["stakeholder"] == stakeholder_choice].iloc[0]
-    effective_stakeholder = stakeholder_choice
 else:
     row = event_df.iloc[0]
-    effective_stakeholder = row["stakeholder"]
 
 row_sentiment = float(row["sentiment"])
 row_category = label_sentiment(row_sentiment)
 
 # -------------------------------------------------
-# Header
+# Title + Summary
 # -------------------------------------------------
 st.title("Shifting Narratives")
-st.subheader(f"{effective_stakeholder} Perspective On “{event}”")
+st.subheader(f"{stakeholder_choice} Perspective On “{event}”")
 
-# -------------------------------------------------
-# Summary (Bigger Text)
-# -------------------------------------------------
-if row_category == "Positive":
-    sent_color = "#2ca02c"
-elif row_category == "Negative":
-    sent_color = "#d62728"
-else:
-    sent_color = "#7f7f7f"
+sent_color = (
+    "#2ca02c" if row_category == "Positive"
+    else "#d62728" if row_category == "Negative"
+    else "#7f7f7f"
+)
 
 st.markdown(
     f"""
-<div style='padding:18px;border-radius:10px;background:#f5f5f5;font-size:22px;line-height:1.5;'>
-  <b>Summary ({effective_stakeholder}):</b><br>{row['text_summary']}
+<div style='padding:18px;border-radius:10px;background:#f5f5f5;font-size:22px;'>
+  <b>Summary ({stakeholder_choice}):</b><br>{row['text_summary']}
 </div>
 """,
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    f"""
-<div style='margin-top:10px;color:{sent_color};font-weight:bold;font-size:20px;'>
-  Sentiment: {row_sentiment:.2f} ({row_category})
-</div>
-""",
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    f"<div style='font-size:18px;margin-top:10px;'><b>Keywords:</b> {row['keywords']}</div>",
+    f"<div style='margin-top:10px;color:{sent_color};font-weight:bold;font-size:20px;'>Sentiment: {row_sentiment:.2f} ({row_category})</div>",
     unsafe_allow_html=True
 )
 
-# -------------------------------------------------
-# Color Legend
-# -------------------------------------------------
+st.markdown(f"<div style='font-size:18px;margin-top:10px;'><b>Keywords:</b> {row['keywords']}</div>", unsafe_allow_html=True)
+
 st.markdown(
     """
 ### Color Meaning  
-🟢 <span style='font-size:18px;'>Green = Positive</span><br>
-⚪ <span style='font-size:18px;'>Grey = Neutral</span><br>
-🔴 <span style='font-size:18px;'>Red = Negative</span>
-""",
-    unsafe_allow_html=True
+🟢 Green = Positive  
+⚪ Grey = Neutral  
+🔴 Red = Negative
+"""
 )
 
 # -------------------------------------------------
-# Sentiment Over Time (All Events)
+# Time Chart (All Events)
 # -------------------------------------------------
 st.markdown("### Sentiment Over Time (All Events)")
 
@@ -188,100 +168,77 @@ time_chart = (
     alt.Chart(df)
     .mark_line(point=True)
     .encode(
-        x=alt.X(
-            "date:T",
-            title="Date",
-            axis=alt.Axis(format="%b %Y", labelAngle=-45)
-        ),
-        y=alt.Y(
-            "sentiment:Q",
-            title="Sentiment Score",
-            scale=alt.Scale(domain=[-0.6, 0.6])
-        ),
-        color=alt.Color("stakeholder:N", title="Stakeholder"),
+        x=alt.X("date:T", title="Date", axis=alt.Axis(format="%b %Y", labelAngle=-45)),
+        y=alt.Y("sentiment:Q", title="Sentiment Score", scale=alt.Scale(domain=[-0.6, 0.6])),
+        color=alt.Color("stakeholder:N"),
         tooltip=["event_name", "stakeholder", "sentiment", "date"]
     )
-    .properties(height=300)
 )
 
 st.altair_chart(time_chart, use_container_width=True)
 
 # -------------------------------------------------
-# Comparison Mode Charts
+# Comparison Mode
 # -------------------------------------------------
 if comparison_mode:
 
-    # -------------------------------------------------
-    # Bar chart: sentiment by stakeholder for selected event
-    # -------------------------------------------------
     st.markdown("### Sentiment Comparison For Selected Event")
 
+    # Basic bar chart
     bar_chart = (
         alt.Chart(event_df)
-        .mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8)
+        .mark_bar()
         .encode(
-            x=alt.X("stakeholder:N", title="Stakeholder"),
-            y=alt.Y("sentiment:Q", title="Score", scale=alt.Scale(domain=[-0.6, 0.6])),
-            color=alt.Color(
-                "sentiment_category:N",
-                title="Sentiment",
-                scale=sentiment_color_scale
-            ),
+            x="stakeholder:N",
+            y=alt.Y("sentiment:Q", scale=alt.Scale(domain=[-0.6, 0.6])),
+            color=alt.Color("sentiment_category:N", scale=sentiment_color_scale),
             tooltip=["stakeholder", "sentiment", "sentiment_category"]
         )
-        .properties(width=500, height=260)
     )
+
     st.altair_chart(bar_chart, use_container_width=True)
 
     # -------------------------------------------------
-    # Emotional intensity: stacked percentage bars per stakeholder
+    # NEW CHART: Convert Sentiment Weight Into Percentages
     # -------------------------------------------------
-    st.markdown("### Emotional Intensity Distribution Per Stakeholder")
+    st.markdown("### Overall Emotional Weight (Converted to Percent)")
 
-    intensity_df = event_df.copy()
-    intensity_df["sentiment_intensity"] = intensity_df["sentiment"].abs()
+    weight_df = event_df.copy()
+    weight_df["intensity"] = weight_df["sentiment"].abs()
 
-    # If all intensities are 0 (edge case), skip chart
-    if intensity_df["sentiment_intensity"].sum() > 0:
+    weight_sums = weight_df.groupby("sentiment_category")["intensity"].sum().reset_index()
+    total = weight_sums["intensity"].sum()
 
-        intensity_chart = (
-            alt.Chart(intensity_df)
-            .mark_bar()
-            .encode(
-                x=alt.X("stakeholder:N", title="Stakeholder"),
-                y=alt.Y(
-                    "sentiment_intensity:Q",
-                    title="Share Of Emotional Intensity",
-                    stack="normalize",
-                    axis=alt.Axis(format="%")
-                ),
-                color=alt.Color(
-                    "sentiment_category:N",
-                    title="Sentiment",
-                    scale=sentiment_color_scale
-                ),
-                tooltip=[
-                    "stakeholder:N",
-                    "sentiment_category:N",
-                    alt.Tooltip("sentiment_intensity:Q", title="Intensity")
-                ]
-            )
-            .properties(width=500, height=260)
+    weight_sums["percent"] = weight_sums["intensity"] / total
+
+    percent_chart = (
+        alt.Chart(weight_sums)
+        .mark_bar()
+        .encode(
+            x=alt.X("sentiment_category:N", title="Sentiment"),
+            y=alt.Y("percent:Q", title="Percentage", axis=alt.Axis(format="%")),
+            color=alt.Color("sentiment_category:N", scale=sentiment_color_scale),
+            tooltip=[
+                "sentiment_category:N",
+                alt.Tooltip("percent:Q", format=".1%", title="Percent"),
+                "intensity:Q"
+            ]
         )
+        .properties(width=500, height=260)
+    )
 
-        st.altair_chart(intensity_chart, use_container_width=True)
+    st.altair_chart(percent_chart, use_container_width=True)
 
-        st.markdown(
-            """
-            <div style='font-size:16px; margin-top:4px;'>
-            For each stakeholder, the bar is split into Positive, Neutral, and Negative parts.<br>
-            The height of each colored segment shows what percentage of that stakeholder's emotional intensity is positive, neutral, or negative for this event.
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    else:
-        st.info("No emotional intensity data available for this event after adjustment.")
+    st.markdown(
+        """
+        <div style='font-size:16px;'>
+        This chart shows how much of the total emotional intensity is Positive,
+        Neutral, or Negative.  
+        Values are converted into percentages, so they always sum to 100%.
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # -------------------------------------------------
 # End Interaction
