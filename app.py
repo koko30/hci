@@ -234,7 +234,7 @@ if comparison_mode:
     st.altair_chart(bar_chart, use_container_width=True)
 
     # -------------------------------------------------
-    # Emotional intensity: 100% stacked bar by sentiment
+    # Emotional intensity: small multiples bar chart
     # -------------------------------------------------
     st.markdown("### Emotional Intensity By Sentiment And Stakeholder")
 
@@ -247,28 +247,33 @@ if comparison_mode:
         .sum()
     )
 
-    # Filter out sentiment categories with zero total intensity
+    # Filter out sentiment categories with zero intensity
     grouped = grouped[grouped["sentiment_intensity"] > 0]
 
     intensity_chart = (
         alt.Chart(grouped)
         .mark_bar()
         .encode(
-            x=alt.X("sentiment_category:N", title="Sentiment"),
+            x=alt.X("stakeholder:N", title="Stakeholder"),
             y=alt.Y(
                 "sentiment_intensity:Q",
-                title="Share Of Intensity",
-                stack="normalize",
-                axis=alt.Axis(format="%")
+                title="Emotional Intensity (|sentiment|)"
             ),
             color=alt.Color("stakeholder:N", title="Stakeholder"),
             tooltip=[
                 "sentiment_category:N",
                 "stakeholder:N",
-                alt.Tooltip("sentiment_intensity:Q", title="Intensity"),
+                alt.Tooltip("sentiment_intensity:Q", title="Intensity")
             ]
         )
-        .properties(width=500, height=260)
+        .facet(
+            column=alt.Column("sentiment_category:N", title="Sentiment")
+        )
+        .properties(
+            width=180,
+            height=260,
+            title=f"Stakeholder Intensity Within Each Sentiment For “{event}”"
+        )
     )
 
     st.altair_chart(intensity_chart, use_container_width=True)
@@ -276,8 +281,8 @@ if comparison_mode:
     st.markdown(
         """
         <div style='font-size:16px; margin-top:4px;'>
-        Each bar represents one sentiment type (Positive, Neutral, Negative).<br>
-        The bar is split between stakeholders, showing their share of emotional intensity for that sentiment in this event.
+        Each small chart represents one sentiment type (Positive, Neutral, Negative).<br>
+        Bar height shows how strong each stakeholder contributes emotionally to that sentiment for this event.
         </div>
         """,
         unsafe_allow_html=True
