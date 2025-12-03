@@ -167,7 +167,7 @@ st.markdown(
 )
 
 # -------------------------------------------------
-# Color Legend (Below Summary, Above Charts)
+# Color Legend
 # -------------------------------------------------
 st.markdown(
     """
@@ -234,59 +234,54 @@ if comparison_mode:
     st.altair_chart(bar_chart, use_container_width=True)
 
     # -------------------------------------------------
-    # Emotional intensity: small multiples bar chart
+    # Emotional intensity: stacked percentage bars per stakeholder
     # -------------------------------------------------
-    st.markdown("### Emotional Intensity By Sentiment And Stakeholder")
+    st.markdown("### Emotional Intensity Distribution Per Stakeholder")
 
-    pie_df = event_df.copy()
-    pie_df["sentiment_intensity"] = pie_df["sentiment"].abs()
+    intensity_df = event_df.copy()
+    intensity_df["sentiment_intensity"] = intensity_df["sentiment"].abs()
 
-    grouped = (
-        pie_df
-        .groupby(["sentiment_category", "stakeholder"], as_index=False)["sentiment_intensity"]
-        .sum()
-    )
+    # If all intensities are 0 (edge case), skip chart
+    if intensity_df["sentiment_intensity"].sum() > 0:
 
-    # Filter out sentiment categories with zero intensity
-    grouped = grouped[grouped["sentiment_intensity"] > 0]
-
-    intensity_chart = (
-        alt.Chart(grouped)
-        .mark_bar()
-        .encode(
-            x=alt.X("stakeholder:N", title="Stakeholder"),
-            y=alt.Y(
-                "sentiment_intensity:Q",
-                title="Emotional Intensity (|sentiment|)"
-            ),
-            color=alt.Color("stakeholder:N", title="Stakeholder"),
-            tooltip=[
-                "sentiment_category:N",
-                "stakeholder:N",
-                alt.Tooltip("sentiment_intensity:Q", title="Intensity")
-            ]
+        intensity_chart = (
+            alt.Chart(intensity_df)
+            .mark_bar()
+            .encode(
+                x=alt.X("stakeholder:N", title="Stakeholder"),
+                y=alt.Y(
+                    "sentiment_intensity:Q",
+                    title="Share Of Emotional Intensity",
+                    stack="normalize",
+                    axis=alt.Axis(format="%")
+                ),
+                color=alt.Color(
+                    "sentiment_category:N",
+                    title="Sentiment",
+                    scale=sentiment_color_scale
+                ),
+                tooltip=[
+                    "stakeholder:N",
+                    "sentiment_category:N",
+                    alt.Tooltip("sentiment_intensity:Q", title="Intensity")
+                ]
+            )
+            .properties(width=500, height=260)
         )
-        .facet(
-            column=alt.Column("sentiment_category:N", title="Sentiment")
-        )
-        .properties(
-            width=180,
-            height=260,
-            title=f"Stakeholder Intensity Within Each Sentiment For “{event}”"
-        )
-    )
 
-    st.altair_chart(intensity_chart, use_container_width=True)
+        st.altair_chart(intensity_chart, use_container_width=True)
 
-    st.markdown(
-        """
-        <div style='font-size:16px; margin-top:4px;'>
-        Each small chart represents one sentiment type (Positive, Neutral, Negative).<br>
-        Bar height shows how strong each stakeholder contributes emotionally to that sentiment for this event.
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        st.markdown(
+            """
+            <div style='font-size:16px; margin-top:4px;'>
+            For each stakeholder, the bar is split into Positive, Neutral, and Negative parts.<br>
+            The height of each colored segment shows what percentage of that stakeholder's emotional intensity is positive, neutral, or negative for this event.
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    else:
+        st.info("No emotional intensity data available for this event after adjustment.")
 
 # -------------------------------------------------
 # End Interaction
