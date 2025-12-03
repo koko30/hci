@@ -180,29 +180,38 @@ st.markdown(
 )
 
 # -------------------------------------------------
-# Timeline Chart (Focused On Selected Event)
+# Sentiment Over Time (Acceleration-style Line Chart)
 # -------------------------------------------------
-st.markdown("### Timeline For Selected Event")
+st.markdown("### Sentiment Over Time (All Events)")
 
-timeline = (
-    alt.Chart(event_df)
-    .mark_circle(size=160)
+time_chart = (
+    alt.Chart(df)
+    .mark_line(point=True)
     .encode(
-        x=alt.X("date:T", title="Date"),
-        y=alt.Y("stakeholder:N", title="Stakeholder"),
-        color="stakeholder:N",
-        tooltip=["event_name", "stakeholder", "sentiment"]
+        x=alt.X(
+            "date:T",
+            title="Date",
+            axis=alt.Axis(format="%b %Y", labelAngle=-45)
+        ),
+        y=alt.Y(
+            "sentiment:Q",
+            title="Sentiment Score",
+            scale=alt.Scale(domain=[-0.6, 0.6])
+        ),
+        color=alt.Color("stakeholder:N", title="Stakeholder"),
+        tooltip=["event_name", "stakeholder", "sentiment", "date"]
     )
+    .properties(height=300)
 )
 
-st.altair_chart(timeline, use_container_width=True)
+st.altair_chart(time_chart, use_container_width=True)
 
 # -------------------------------------------------
 # Comparison Mode Charts
 # -------------------------------------------------
 if comparison_mode:
 
-    st.markdown("### Sentiment Comparison")
+    st.markdown("### Sentiment Comparison For Selected Event")
 
     bar_chart = (
         alt.Chart(event_df)
@@ -217,7 +226,7 @@ if comparison_mode:
     )
     st.altair_chart(bar_chart, use_container_width=True)
 
-    st.markdown("### Emotional Intensity")
+    st.markdown("### Emotional Intensity For Selected Event")
 
     pie_df = event_df.copy()
     pie_df["sentiment_intensity"] = pie_df["sentiment"].abs()
