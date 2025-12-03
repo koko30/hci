@@ -1,20 +1,64 @@
 event_name,stakeholder,text_summary,sentiment,keywords,date
-Climate Summit,Government,Government stresses cooperation and long-term climate agreements.,0.45,"agreement, targets, cooperation",2023-11-15
-Climate Summit,Media,Media highlights mixed reactions and different negotiation outcomes.,0.05,"reactions, negotiation, outcomes",2023-11-15
-Climate Summit,Public,Public expresses hope but also frustration about slow progress.,-0.18,"hope, frustration, progress",2023-11-15
+Climate Summit 2024,Government,Government stresses global cooperation towards carbon neutrality,0.42,carbon-neutrality-policy-agreement,2024-12-05
+Climate Summit 2024,Media,Media highlights disputes between major emitters and slow progress,-0.18,dispute-negotiation-pressure,2024-12-05
+Climate Summit 2024,Public,Public reacts with mixed hope and doubt about real action,0.03,hope-doubt-climate,2024-12-05
 
-AI Regulation,Government,Government presents AI innovation and safety frameworks.,0.32,"innovation, safety, framework",2024-02-10
-AI Regulation,Media,Media reports on heated debates about regulation speed.,-0.22,"debate, risk, oversight",2024-02-10
-AI Regulation,Public,Public reactions show uncertainty and cautious optimism.,0.00,"uncertainty, optimism, concern",2024-02-10
+AI Regulation Act,Government,Government announces strict rules for safe AI development,0.35,ai-governance-safety-framework,2024-09-10
+AI Regulation Act,Media,Media focuses on tech companies warning about slowed innovation,-0.22,innovation-delay-risk,2024-09-10
+AI Regulation Act,Public,Public expresses mixed feelings about privacy and transparency,0.01,privacy-transparency-fear,2024-09-10
 
-World Cup Final,Government,Government congratulates athletes and praises sportsmanship.,0.52,"pride, celebration, unity",2022-12-18
-World Cup Final,Media,Media covers intense match moments and controversial decisions.,-0.14,"drama, controversy, intensity",2022-12-18
-World Cup Final,Public,Public shares excitement but also calm appreciation.,0.03,"reaction, appreciation, enthusiasm",2022-12-18
+World Cup Final 2022,Government,Government celebrates unity and congratulates national team,0.50,unity-sports-national,2022-12-18
+World Cup Final 2022,Media,Media covers dramatic moments and referee controversies,-0.14,drama-referee-controversy,2022-12-18
+World Cup Final 2022,Public,Public expresses excitement with some frustration over decisions,0.07,excitement-frustration,2022-12-18
 
-Tech Layoffs,Government,Government comments on economic impact and workforce transitions.,-0.08,"economy, job-loss, transition",2023-09-04
-Tech Layoffs,Media,Media focuses on sudden layoffs and market volatility.,-0.25,"volatility, layoffs, reaction",2023-09-04
-Tech Layoffs,Public,Public shares mixed opinions about working conditions.,0.07,"conditions, fairness, opinion",2023-09-04
+Tech Layoffs 2023,Government,Government frames layoffs as an economic readjustment,-0.05,economic-adjustment-workforce,2023-04-01
+Tech Layoffs 2023,Media,Media highlights large-scale layoffs and emotional worker stories,-0.28,job-loss-industry,2023-04-01
+Tech Layoffs 2023,Public,Public reacts with fear and anger about job security,-0.33,fear-job-security,2023-04-01
 
-Mars Mission Launch,Government,Government celebrates scientific achievement and international cooperation.,0.48,"science, cooperation, success",2024-07-21
-Mars Mission Launch,Media,Media highlights both excitement and the mission's high risks.,0.02,"risk, mission, anticipation",2024-07-21
-Mars Mission Launch,Public,Public expresses fascination and pride but also questions costs.,-0.06,"curiosity, pride, cost",2024-07-21
+Global Flood Crisis,Government,Government promises emergency funding and international aid,0.30,aid-emergency-support,2024-05-11
+Global Flood Crisis,Media,Media focuses on destruction and lack of preparation,-0.25,destruction-failure-impact,2024-05-11
+Global Flood Crisis,Public,Public expresses sadness and calls for accountability,-0.10,sadness-loss-demand,2024-05-11
+
+Elections 2024,Government,Government claims election was fair and transparent,0.20,transparency-democracy,2024-11-09
+Elections 2024,Media,Media reports accusations of irregularities,-0.12,irregularities-claims-politics,2024-11-09
+Elections 2024,Public,Public expresses mixed reactions about fairness,-0.02,fairness-trust-doubt,2024-11-09
+
+Pandemic Recovery Plan,Government,Government highlights strong recovery and economic improvements,0.38,recovery-growth-health,2023-06-20
+Pandemic Recovery Plan,Media,Media points out gaps in support for vulnerable populations,-0.15,support-gap-inequality,2023-06-20
+Pandemic Recovery Plan,Public,Public discusses relief with cautious optimism,0.12,optimism-recovery-caution,2023-06-20
+
+Space Mission Launch,Government,Government celebrates technological achievement and national pride,0.55,achievement-space-pride,2024-07-03
+Space Mission Launch,Media,Media highlights budget concerns and technical risks,-0.08,budget-risk-space,2024-07-03
+Space Mission Launch,Public,Public expresses excitement and admiration,0.25,excitement-technology,2024-07-03
+
+Inflation Report 2024,Government,Government emphasizes stability and long-term control plans,0.10,stability-plan-economy,2024-03-15
+Inflation Report 2024,Media,Media focuses on rising costs and public struggle,-0.30,costs-struggle-inflation,2024-03-15
+Inflation Report 2024,Public,Public expresses frustration and concern,-0.22,frustration-living-cost,2024-03-15
+
+Cybersecurity Breach,Government,Government assures public that systems are secure and investigation ongoing,-0.05,security-investigation,2024-08-01
+Cybersecurity Breach,Media,Media highlights scale of breach and vulnerabilities,-0.35,breach-vulnerability-data,2024-08-01
+Cybersecurity Breach,Public,Public expresses anger and fear over stolen data,-0.40,fear-data-privacy,2024-08-01
+
+Energy Crisis 2023,Government,Government announces subsidies and crisis management plans,0.18,subsidy-energy-crisis,2023-02-14
+Energy Crisis 2023,Media,Media emphasizes shortages and rising electricity bills,-0.27,shortage-cost-energy,2023-02-14
+Energy Crisis 2023,Public,Public expresses anxiety about heating and bills,-0.20,anxiety-heating-bills,2023-02-14
+
+War Conflict Update,Government,Government expresses commitment to peace negotiations,0.12,peace-negotiation-stability,2024-10-12
+War Conflict Update,Media,Media focuses on casualties and destroyed infrastructure,-0.32,casualties-conflict-damage,2024-10-12
+War Conflict Update,Public,Public expresses fear and sadness,-0.28,fear-sadness-war,2024-10-12
+
+Education Reform Bill,Government,Government highlights improvements in access and quality,0.40,education-access-quality,2023-05-25
+Education Reform Bill,Media,Media questions practicality and budget concerns,-0.12,question-budget-feasibility,2023-05-25
+Education Reform Bill,Public,Public shows cautious optimism with some doubt,0.05,optimism-doubt-reform,2023-05-25
+
+Transportation Strike,Government,Government asks for patience and promises negotiations,-0.05,negotiation-transport-patience,2024-01-14
+Transportation Strike,Media,Media reports chaos, delays, and public frustration,-0.30,chaos-delay-frustration,2024-01-14
+Transportation Strike,Public,Public expresses anger at disruptions,-0.40,anger-disruption-travel,2024-01-14
+
+Heatwave Emergency,Government,Government announces heat warnings and support measures,0.10,warning-support-health,2024-07-20
+Heatwave Emergency,Media,Media highlights deaths and healthcare pressure,-0.26,heat-death-pressure,2024-07-20
+Heatwave Emergency,Public,Public expresses worry and discomfort,-0.18,worry-heat-health,2024-07-20
+
+Financial Market Crash,Government,Government assures markets will stabilize,0.02,stability-assurance-economy,2023-11-30
+Financial Market Crash,Media,Media reports panic and rapid market decline,-0.45,panic-decline-market,2023-11-30
+Financial Market Crash,Public,Public reacts with fear and loss of trust,-0.38,fear-loss-market,2023-11-30
