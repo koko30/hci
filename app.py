@@ -180,7 +180,7 @@ st.markdown(
 )
 
 # -------------------------------------------------
-# Sentiment Over Time (Acceleration-style Line Chart)
+# Sentiment Over Time (All Events)
 # -------------------------------------------------
 st.markdown("### Sentiment Over Time (All Events)")
 
@@ -239,7 +239,11 @@ if comparison_mode:
         .sum()
     )
 
+    # Remove sentiment categories where total intensity is zero to avoid division by zero
     grouped["total_in_category"] = grouped.groupby("sentiment_category")["sentiment_intensity"].transform("sum")
+    grouped = grouped[grouped["total_in_category"] > 0]
+
+    # Compute percentage share within each sentiment category
     grouped["share"] = grouped["sentiment_intensity"] / grouped["total_in_category"]
 
     pie_chart = (
@@ -256,7 +260,7 @@ if comparison_mode:
             ]
         )
         .facet(
-            column=alt.Column("sentiment_category:N", title="Sentiment")
+            column="sentiment_category:N"
         )
         .properties(
             width=160,
@@ -271,7 +275,7 @@ if comparison_mode:
         """
         <div style='font-size:16px; margin-top:4px;'>
         Each pie represents one sentiment type (Positive, Neutral, Negative).<br>
-        The slices inside a pie show how much each stakeholder contributes to that sentiment for this event, as a percentage.
+        Inside each pie, slices show how much each stakeholder contributes to that sentiment for this event, as a percentage.
         </div>
         """,
         unsafe_allow_html=True
