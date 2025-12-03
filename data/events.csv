@@ -1,73 +1,55 @@
 event_name,stakeholder,text_summary,sentiment,keywords,date
-"Climate Summit 2024","Government","Government stresses global cooperation towards carbon neutrality in official statements.",0.42,"carbon-neutrality,cooperation,long-term policy","2024-12-05"
-"Climate Summit 2024","Government","Government highlights successful agreements on emissions targets with partner countries.",0.46,"emissions targets,agreements,diplomacy","2024-12-05"
-"Climate Summit 2024","Government","Government frames the summit as a historic step for climate justice and fairness.",0.38,"climate justice,fairness,global South","2024-12-05"
-"Climate Summit 2024","Government","Government emphasises that national interests are balanced with global responsibility.",0.30,"national interest,global responsibility,balance","2024-12-05"
-"Climate Summit 2024","Government","Government reassures citizens that the climate plan will create green jobs.",0.33,"green jobs,transition,economy","2024-12-05"
-"Climate Summit 2024","Government","Government presents the summit outcome as proof of strong international leadership.",0.40,"leadership,credibility,international role","2024-12-05"
-"Climate Summit 2024","Media","Media highlights disputes between major emitters and slow progress at the summit.",-0.18,"disputes,slow progress,frustration","2024-12-05"
-"Climate Summit 2024","Media","Media coverage focuses on protests outside the venue and civil society criticism.",-0.22,"protests,civil society,criticism","2024-12-05"
-"Climate Summit 2024","Media","Media points out gaps between announced targets and binding commitments.",-0.15,"targets,gaps,non-binding pledges","2024-12-05"
-"Climate Summit 2024","Media","Media compares current promises with earlier failed climate agreements.",-0.20,"broken promises,history,climate talks","2024-12-05"
-"Climate Summit 2024","Media","Media reports on disagreements over climate finance for vulnerable nations.",-0.17,"climate finance,vulnerable nations,disagreement","2024-12-05"
-"Climate Summit 2024","Media","Media notes that some observers still see the summit as a modest step forward.",0.05,"modest progress,observers,mixed view","2024-12-05"
-"Climate Summit 2024","Public","Public posts show hope about global cooperation but doubt about real change.",0.03,"hope,doubt,online reactions","2024-12-05"
-"Climate Summit 2024","Public","Public comments express worry about personal costs of green policies.",-0.08,"cost of living,worry,green policy","2024-12-05"
-"Climate Summit 2024","Public","Public discussions reveal generational differences in trust towards climate agreements.",-0.02,"young vs old,trust,differences","2024-12-05"
-"Climate Summit 2024","Public","Public shares supportive messages for activists demanding stronger action.",0.10,"support,activists,stronger action","2024-12-05"
-"Climate Summit 2024","Public","Public expresses fatigue about repeated climate promises with little visible impact.",-0.12,"fatigue,promises,no change","2024-12-05"
-"Climate Summit 2024","Public","Public reactions mix local concerns like floods and heatwaves with global debate.",0.01,"local impact,heatwave,floods","2024-12-05"
-
-"AI Regulation Act","Government","Government announces a new AI regulation act focusing on safety and transparency.",0.35,"AI safety,transparency,regulation","2024-09-10"
-"AI Regulation Act","Government","Government frames the act as protecting citizens from misuse of AI systems.",0.32,"protection,misuse,risk management","2024-09-10"
-"AI Regulation Act","Government","Government assures companies that innovation is still encouraged under clear rules.",0.20,"innovation,clear rules,balance","2024-09-10"
-"AI Regulation Act","Government","Government highlights international alignment with other AI governance frameworks.",0.28,"international alignment,governance,standards","2024-09-10"
-"AI Regulation Act","Government","Government stresses the importance of ethical principles in AI deployment.",0.30,"ethics,principles,responsible AI","2024-09-10"
-"AI Regulation Act","Government","Government presents the act as future-proofing the economy for the digital age.",0.33,"future-proof,economy,digital age","2024-09-10"
-"AI Regulation Act","Media","Media focuses on tech companies warning that strict rules may slow innovation.",-0.22,"slow innovation,tech lobby,concern","2024-09-10"
-"AI Regulation Act","Media","Media articles highlight disagreements between startups and large corporations.",-0.10,"startups,corporations,conflict","2024-09-10"
-"AI Regulation Act","Media","Media questions whether enforcement capacity is strong enough.",-0.12,"enforcement,capacity,questions","2024-09-10"
-"AI Regulation Act","Media","Media interviews legal experts about possible loopholes in the act.",-0.05,"loopholes,legal analysis,uncertainty","2024-09-10"
-"AI Regulation Act","Media","Media notes that privacy advocates welcome some parts of the regulation.",0.08,"privacy advocates,welcomed measures","2024-09-10"
-"AI Regulation Act","Media","Media compares the act with similar rules debated in other regions.",0.02,"comparison,EU,global debate","2024-09-10"
-"AI Regulation Act","Public","Public reactions show confusion about what the regulation means in daily life.",-0.04,"confusion,day-to-day impact","2024-09-10"
-"AI Regulation Act","Public","Public expresses concern about job losses linked to automation.",-0.16,"job loss,automation,anxiety","2024-09-10"
-"AI Regulation Act","Public","Public comments also show relief about stricter control over AI in sensitive areas.",0.12,"relief,control,sensitive sectors","2024-09-10"
-"AI Regulation Act","Public","Public debates fairness of AI decisions in banking and hiring.",-0.02,"fairness,hiring,banking","2024-09-10"
-"AI Regulation Act","Public","Public shares memes joking about robots taking over, mixing humor and fear.",0.01,"memes,humor,future fear","2024-09-10"
-"AI Regulation Act","Public","Public discussions highlight demand for more education on AI rights and risks.",0.06,"education,AI rights,awareness","2024-09-10"
-
-"World Cup Final 2022","Government","Government congratulates the national team and underlines unity and pride.",0.50,"congratulations,unity,national pride","2022-12-18"
-"World Cup Final 2022","Government","Government uses the victory to promote national image abroad.",0.45,"soft power,national image,sports diplomacy","2022-12-18"
-"World Cup Final 2022","Government","Government organises official celebrations and invites fans to public events.",0.40,"celebrations,public events,festivity","2022-12-18"
-"World Cup Final 2022","Government","Government messages highlight fair play and sportsmanship.",0.38,"fair play,sportsmanship,values","2022-12-18"
-"World Cup Final 2022","Government","Government links sports success to investment in youth and infrastructure.",0.30,"youth investment,infrastructure,sport policy","2022-12-18"
-"World Cup Final 2022","Government","Government acknowledges the team even if final result is a narrow loss.",0.22,"respect,effort,team spirit","2022-12-18"
-"World Cup Final 2022","Media","Media focuses on dramatic turning points and referee decisions.",-0.14,"referee decisions,drama,controversy","2022-12-18"
-"World Cup Final 2022","Media","Media debates tactical choices of the coach.",-0.05,"tactics,coach,analysis","2022-12-18"
-"World Cup Final 2022","Media","Media amplifies emotional reactions from players and fans.",0.12,"emotion,tears,fans reactions","2022-12-18"
-"World Cup Final 2022","Media","Media compares this final to historical matches of previous decades.",0.08,"history,comparison,legendary games","2022-12-18"
-"World Cup Final 2022","Media","Media highlights economic benefits for host cities.",0.10,"tourism,economic impact,host city","2022-12-18"
-"World Cup Final 2022","Media","Media also reports concerns about security and crowd control.",-0.09,"security,crowd control,concern","2022-12-18"
-"World Cup Final 2022","Public","Public expresses intense joy, sharing celebrations on social media.",0.35,"joy,celebration,social media","2022-12-18"
-"World Cup Final 2022","Public","Public posts show frustration about some referee calls.",-0.12,"anger,referee,unfairness","2022-12-18"
-"World Cup Final 2022","Public","Public uses the match to spark debates about national identity.",0.05,"identity,belonging,nation","2022-12-18"
-"World Cup Final 2022","Public","Public shares memes and jokes that turn tense moments into humor.",0.18,"memes,humor,coping","2022-12-18"
-"World Cup Final 2022","Public","Public reactions also mention ticket prices and accessibility.",-0.06,"ticket price,accessibility,critique","2022-12-18"
-"World Cup Final 2022","Public","Public continues discussing the match days later, keeping emotions alive.",0.10,"afterglow,ongoing debate,emotion","2022-12-18"
-
-"Tech Layoffs 2023","Government","Government frames layoffs as a temporary correction in the tech sector.",-0.05,"temporary correction,market cycle","2023-04-01"
-"Tech Layoffs 2023","Government","Government promises reskilling programmes for affected workers.",0.12,"reskilling,training,workforce support","2023-04-01"
-"Tech Layoffs 2023","Government","Government stresses that fundamentals of the economy remain strong.",0.05,"economic fundamentals,stability,message","2023-04-01"
-"Tech Layoffs 2023","Government","Government encourages companies to handle layoffs responsibly.",-0.02,"responsible layoffs,corporate duty","2023-04-01"
-"Tech Layoffs 2023","Government","Government announces consultations with unions and industry leaders.",0.03,"consultation,unions,industry","2023-04-01"
-"Tech Layoffs 2023","Government","Government highlights social safety nets available to those who lose jobs.",0.08,"social safety net,benefits,support","2023-04-01"
-"Tech Layoffs 2023","Media","Media emphasises the scale of layoffs across multiple tech giants.",-0.28,"mass layoffs,tech giants,shock","2023-04-01"
-"Tech Layoffs 2023","Media","Media tells personal stories of employees suddenly losing jobs.",-0.30,"personal stories,uncertainty,stress","2023-04-01"
-"Tech Layoffs 2023","Media","Media links layoffs to previous over-hiring during the pandemic boom.",-0.18,"over-hiring,pandemic boom,correction","2023-04-01"
-"Tech Layoffs 2023","Media","Media questions executive bonuses during mass job cuts.",-0.25,"executive bonuses,inequality,criticism","2023-04-01"
-"Tech Layoffs 2023","Media","Media compares conditions in different countries for laid-off workers.",-0.10,"comparison,countries,worker rights","2023-04-01"
-"Tech Layoffs 2023","Media","Media explores whether remote work is being blamed unfairly.",-0.05,"remote work,scapegoat,debate","2023-04-01"
-"Tech Layoffs 2023","Public","Public reacts with fear about job security in tech careers.",-0.33,"job security,fear,anxiety","2023-04-01"
-"Tech Layoffs 2023","Public","Public shares solidarity messages and job leads in online communities.",0.15,"solidarity,job leads,community","2023-04-01"
-"Tech Layoffs 2023","Public","Public debates whether tech salaries were unsustainably high.",-0.03,"salary levels,sustainability,debat
+Climate Summit 2024,Government,Government narrative 1 about Climate Summit 2024.,-0.05,government-climate-view1,2024-12-05
+Climate Summit 2024,Government,Government narrative 2 about Climate Summit 2024.,0.05,government-climate-view2,2024-12-05
+Climate Summit 2024,Government,Government narrative 3 about Climate Summit 2024.,0.15,government-climate-view3,2024-12-05
+Climate Summit 2024,Government,Government narrative 4 about Climate Summit 2024.,0.25,government-climate-view4,2024-12-05
+Climate Summit 2024,Government,Government narrative 5 about Climate Summit 2024.,0.35,government-climate-view5,2024-12-05
+Climate Summit 2024,Government,Government narrative 6 about Climate Summit 2024.,0.45,government-climate-view6,2024-12-05
+Climate Summit 2024,Media,Media narrative 1 about Climate Summit 2024.,-0.35,media-climate-view1,2024-12-05
+Climate Summit 2024,Media,Media narrative 2 about Climate Summit 2024.,-0.25,media-climate-view2,2024-12-05
+Climate Summit 2024,Media,Media narrative 3 about Climate Summit 2024.,-0.15,media-climate-view3,2024-12-05
+Climate Summit 2024,Media,Media narrative 4 about Climate Summit 2024.,-0.05,media-climate-view4,2024-12-05
+Climate Summit 2024,Media,Media narrative 5 about Climate Summit 2024.,0.05,media-climate-view5,2024-12-05
+Climate Summit 2024,Media,Media narrative 6 about Climate Summit 2024.,0.15,media-climate-view6,2024-12-05
+Climate Summit 2024,Public,Public narrative 1 about Climate Summit 2024.,-0.25,public-climate-view1,2024-12-05
+Climate Summit 2024,Public,Public narrative 2 about Climate Summit 2024.,-0.15,public-climate-view2,2024-12-05
+Climate Summit 2024,Public,Public narrative 3 about Climate Summit 2024.,-0.05,public-climate-view3,2024-12-05
+Climate Summit 2024,Public,Public narrative 4 about Climate Summit 2024.,0.05,public-climate-view4,2024-12-05
+Climate Summit 2024,Public,Public narrative 5 about Climate Summit 2024.,0.15,public-climate-view5,2024-12-05
+Climate Summit 2024,Public,Public narrative 6 about Climate Summit 2024.,0.25,public-climate-view6,2024-12-05
+AI Regulation Act,Government,Government narrative 1 about AI Regulation Act.,-0.05,government-ai-view1,2024-09-10
+AI Regulation Act,Government,Government narrative 2 about AI Regulation Act.,0.05,government-ai-view2,2024-09-10
+AI Regulation Act,Government,Government narrative 3 about AI Regulation Act.,0.15,government-ai-view3,2024-09-10
+AI Regulation Act,Government,Government narrative 4 about AI Regulation Act.,0.25,government-ai-view4,2024-09-10
+AI Regulation Act,Government,Government narrative 5 about AI Regulation Act.,0.35,government-ai-view5,2024-09-10
+AI Regulation Act,Government,Government narrative 6 about AI Regulation Act.,0.45,government-ai-view6,2024-09-10
+AI Regulation Act,Media,Media narrative 1 about AI Regulation Act.,-0.35,media-ai-view1,2024-09-10
+AI Regulation Act,Media,Media narrative 2 about AI Regulation Act.,-0.25,media-ai-view2,2024-09-10
+AI Regulation Act,Media,Media narrative 3 about AI Regulation Act.,-0.15,media-ai-view3,2024-09-10
+AI Regulation Act,Media,Media narrative 4 about AI Regulation Act.,-0.05,media-ai-view4,2024-09-10
+AI Regulation Act,Media,Media narrative 5 about AI Regulation Act.,0.05,media-ai-view5,2024-09-10
+AI Regulation Act,Media,Media narrative 6 about AI Regulation Act.,0.15,media-ai-view6,2024-09-10
+AI Regulation Act,Public,Public narrative 1 about AI Regulation Act.,-0.25,public-ai-view1,2024-09-10
+AI Regulation Act,Public,Public narrative 2 about AI Regulation Act.,-0.15,public-ai-view2,2024-09-10
+AI Regulation Act,Public,Public narrative 3 about AI Regulation Act.,-0.05,public-ai-view3,2024-09-10
+AI Regulation Act,Public,Public narrative 4 about AI Regulation Act.,0.05,public-ai-view4,2024-09-10
+AI Regulation Act,Public,Public narrative 5 about AI Regulation Act.,0.15,public-ai-view5,2024-09-10
+AI Regulation Act,Public,Public narrative 6 about AI Regulation Act.,0.25,public-ai-view6,2024-09-10
+World Cup Final 2022,Government,Government narrative 1 about World Cup Final 2022.,-0.05,government-world-view1,2022-12-18
+World Cup Final 2022,Government,Government narrative 2 about World Cup Final 2022.,0.05,government-world-view2,2022-12-18
+World Cup Final 2022,Government,Government narrative 3 about World Cup Final 2022.,0.15,government-world-view3,2022-12-18
+World Cup Final 2022,Government,Government narrative 4 about World Cup Final 2022.,0.25,government-world-view4,2022-12-18
+World Cup Final 2022,Government,Government narrative 5 about World Cup Final 2022.,0.35,government-world-view5,2022-12-18
+World Cup Final 2022,Government,Government narrative 6 about World Cup Final 2022.,0.45,government-world-view6,2022-12-18
+World Cup Final 2022,Media,Media narrative 1 about World Cup Final 2022.,-0.35,media-world-view1,2022-12-18
+World Cup Final 2022,Media,Media narrative 2 about World Cup Final 2022.,-0.25,media-world-view2,2022-12-18
+World Cup Final 2022,Media,Media narrative 3 about World Cup Final 2022.,-0.15,media-world-view3,2022-12-18
+World Cup Final 2022,Media,Media narrative 4 about World Cup Final 2022.,-0.05,media-world-view4,2022-12-18
+World Cup Final 2022,Media,Media narrative 5 about World Cup Final 2022.,0.05,media-world-view5,2022-12-18
+World Cup Final 2022,Media,Media narrative 6 about World Cup Final 2022.,0.15,media-world-view6,2022-12-18
+World Cup Final 2022,Public,Public narrative 1 about World Cup Final 2022.,-0.25,public-world-view1,2022-12-18
+World Cup Final 2022,Public,Public narrative 2 about World Cup Final 2022.,-0.15,public-world-view2,2022-12-18
+World Cup Final 2022,Public,Public narrative 3 about World Cup Final 2022.,-0.05,public-world-view3,2022-12-18
+World Cup Final 2022,Public,Public narrative 4 about World Cup Final 2022.,0.05,public-world-view4,2022-12-18
+World Cup Final 2022,Public,Public narrative 5 about World Cup Final 2022.,0.15,public-world-view5,2022-12-18
+World Cup Final 2022,Public,Public narrative 6 about World Cup Final 2022.,0.25,public-world-view6,2022-12-18
