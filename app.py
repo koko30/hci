@@ -4,7 +4,7 @@ import altair as alt
 from pathlib import Path
 
 # -------------------------------------------------
-# Page Setup: Defines title, icon, and screen layout
+# Page Setup
 # -------------------------------------------------
 st.set_page_config(
     page_title="Shifting Narratives",
@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # -------------------------------------------------
-# Data Loading: Reads event data from CSV or uses a fallback sample
+# Data Loading
 # -------------------------------------------------
 data_path = Path("data/events.csv")
 
@@ -22,43 +22,53 @@ if data_path.exists():
 else:
     df = pd.DataFrame({
         "event_name": [
-            "Climate Summit", "Climate Summit",
-            "AI Regulation", "AI Regulation",
-            "World Cup Final", "World Cup Final"
+            "Climate Summit", "Climate Summit", "Climate Summit",
+            "AI Regulation", "AI Regulation", "AI Regulation",
+            "World Cup Final", "World Cup Final", "World Cup Final"
         ],
         "stakeholder": [
-            "Government", "Media",
-            "Government", "Media",
-            "Public", "Media"
+            "Government", "Media", "Public",
+            "Government", "Media", "Public",
+            "Government", "Media", "Public"
         ],
         "text_summary": [
-            "Focuses on cooperation and policy agreements.",
-            "Highlights protests and controversies.",
-            "Emphasizes innovation and competitiveness.",
-            "Warns about risks and ethical concerns.",
-            "Celebrates unity and friendly rivalry.",
-            "Debates referee decisions and drama."
+            "Government stresses cooperation and long-term climate agreements.",
+            "Media emphasizes mixed reactions and different negotiation outcomes.",
+            "Public expresses hope but also frustration about slow progress.",
+            "Government highlights AI innovation and safety frameworks.",
+            "Media reports on heated debates about regulation speed.",
+            "Public discussions show uncertainty and cautious optimism.",
+            "Government congratulates athletes and focuses on national pride.",
+            "Media covers intense match moments and controversial decisions.",
+            "Public reactions include excitement and a calm appreciation of the match."
         ],
-        "sentiment": [0.6, -0.3, 0.4, -0.2, 0.5, -0.1],
+        "sentiment": [
+            0.45, 0.02, -0.18,
+            0.32, -0.22, 0.00,
+            0.52, -0.14, 0.03
+        ],
         "keywords": [
-            "policy, agreement, targets",
-            "protest, criticism, deal",
-            "innovation, regulation, growth",
-            "risk, ethics, control",
-            "celebration, unity, rivalry",
-            "referee, drama, debate"
+            "agreement, targets, cooperation",
+            "reactions, negotiation, outcomes",
+            "hope, frustration, progress",
+            "innovation, safety, framework",
+            "risk, debate, speed",
+            "uncertainty, optimism, discussion",
+            "pride, celebration, unity",
+            "drama, controversy, intensity",
+            "reaction, appreciation, calm"
         ],
         "date": [
-            "2023-11-15", "2023-11-15",
-            "2024-02-10", "2024-02-10",
-            "2022-12-18", "2022-12-18"
+            "2023-11-15", "2023-11-15", "2023-11-15",
+            "2024-02-10", "2024-02-10", "2024-02-10",
+            "2022-12-18", "2022-12-18", "2022-12-18"
         ]
     })
 
 df["date"] = pd.to_datetime(df["date"])
 
 # -------------------------------------------------
-# Sentiment Label Function: Converts numeric values into categories
+# Sentiment Categorization
 # -------------------------------------------------
 def label_sentiment(s: float) -> str:
     if s > 0.05:
@@ -70,43 +80,45 @@ def label_sentiment(s: float) -> str:
 
 df["sentiment_category"] = df["sentiment"].apply(label_sentiment)
 
-# Color mapping for sentiment categories
 sentiment_color_scale = alt.Scale(
     domain=["Positive", "Neutral", "Negative"],
     range=["#2ca02c", "#7f7f7f", "#d62728"]
 )
 
 # -------------------------------------------------
-# Sidebar Controls: User selections for event, perspective, and sentiment adjustment
+# Sidebar Controls
 # -------------------------------------------------
 st.sidebar.header("Controls")
 
 event = st.sidebar.selectbox(
-    "Select an event",
+    "Select Event",
     options=df["event_name"].unique()
 )
 
 stakeholder_choice = st.sidebar.radio(
-    "Select stakeholder",
-    options=["Government", "Media", "Public"]
+    "Select Stakeholder",
+    options=df["stakeholder"].unique()
 )
 
 mood_adjust = st.sidebar.slider(
-    "Adjust sentiment intensity",
+    "Adjust Sentiment Intensity",
     min_value=-0.5,
     max_value=0.5,
     value=0.0,
     step=0.05
 )
 
+comparison_mode = st.sidebar.checkbox(
+    "Enable Comparison Mode",
+)
+
 # -------------------------------------------------
-# Filtering: Extracts data for the selected event and applies adjustments
+# Event Filtering
 # -------------------------------------------------
 event_df = df[df["event_name"] == event].copy()
 event_df["sentiment"] = event_df["sentiment"] + mood_adjust
 event_df["sentiment_category"] = event_df["sentiment"].apply(label_sentiment)
 
-# Determine which narrative to display as the main summary
 if stakeholder_choice in event_df["stakeholder"].unique():
     row = event_df[event_df["stakeholder"] == stakeholder_choice].iloc[0]
     effective_stakeholder = stakeholder_choice
@@ -123,21 +135,17 @@ row_category = label_sentiment(row_sentiment)
 st.title("Shifting Narratives")
 st.subheader(f"{effective_stakeholder} Perspective On “{event}”")
 
-# -------------------------------------------------
-# Color legend for sentiment interpretation
-# -------------------------------------------------
 st.markdown(
     """
-### Color Meaning
-
-- 🟢 Green = Positive  
-- ⚪ Grey = Neutral  
-- 🔴 Red = Negative  
+### Color Meaning  
+🟢 Green = Positive  
+⚪ Grey = Neutral  
+🔴 Red = Negative  
 """
 )
 
 # -------------------------------------------------
-# Summary Display: Shows narrative text and sentiment value
+# Main Summary Display
 # -------------------------------------------------
 if row_category == "Positive":
     sent_color = "#2ca02c"
@@ -167,7 +175,7 @@ st.markdown(
 st.write(f"**Keywords:** {row['keywords']}")
 
 # -------------------------------------------------
-# Timeline Chart: Displays when each narrative was recorded
+# Timeline Chart
 # -------------------------------------------------
 st.markdown("### Event Timeline")
 
@@ -180,68 +188,52 @@ timeline = (
         color="stakeholder:N",
         tooltip=["event_name", "stakeholder", "sentiment"]
     )
-    .properties(height=160)
 )
 
 st.altair_chart(timeline, use_container_width=True)
 
 # -------------------------------------------------
-# Bar Chart: Shows sentiment values above or below zero
+# Comparison Mode Charts
 # -------------------------------------------------
-st.markdown("### Sentiment Comparison")
+if comparison_mode:
 
-bar_chart = (
-    alt.Chart(event_df)
-    .mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8)
-    .encode(
-        x=alt.X("stakeholder:N", title="Stakeholder"),
-        y=alt.Y(
-            "sentiment:Q",
-            title="Sentiment Score",
-            scale=alt.Scale(domain=[-0.6, 0.6])
-        ),
-        color=alt.Color(
-            "sentiment_category:N",
-            title="Sentiment",
-            scale=sentiment_color_scale
-        ),
-        tooltip=["stakeholder", "sentiment", "sentiment_category"]
+    # Sentiment Bar Chart
+    st.markdown("### Sentiment Comparison")
+
+    bar_chart = (
+        alt.Chart(event_df)
+        .mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8)
+        .encode(
+            x=alt.X("stakeholder:N", title="Stakeholder"),
+            y=alt.Y("sentiment:Q", title="Sentiment Score", scale=alt.Scale(domain=[-0.6, 0.6])),
+            color=alt.Color("sentiment_category:N", title="Sentiment", scale=sentiment_color_scale),
+            tooltip=["stakeholder", "sentiment", "sentiment_category"]
+        )
+        .properties(width=500, height=260)
     )
-    .properties(width=500, height=260)
-)
+    st.altair_chart(bar_chart, use_container_width=True)
 
-st.altair_chart(bar_chart, use_container_width=True)
+    # Pie Chart for Intensity
+    st.markdown("### Emotional Intensity")
 
-# -------------------------------------------------
-# Pie Chart: Represents the strength of emotional tone
-# -------------------------------------------------
-st.markdown("### Emotional Intensity")
+    pie_df = event_df.copy()
+    pie_df["sentiment_intensity"] = pie_df["sentiment"].abs()
 
-pie_df = event_df.copy()
-pie_df["sentiment_intensity"] = pie_df["sentiment"].abs()
-
-pie_chart = (
-    alt.Chart(pie_df)
-    .mark_arc(innerRadius=40)
-    .encode(
-        theta=alt.Theta("sentiment_intensity:Q", title="Intensity"),
-        color=alt.Color(
-            "sentiment_category:N",
-            title="Sentiment",
-            scale=sentiment_color_scale
-        ),
-        tooltip=["stakeholder", "sentiment", "sentiment_category"]
+    pie_chart = (
+        alt.Chart(pie_df)
+        .mark_arc(innerRadius=40)
+        .encode(
+            theta=alt.Theta("sentiment_intensity:Q", title="Intensity"),
+            color=alt.Color("sentiment_category:N", title="Sentiment", scale=sentiment_color_scale),
+            tooltip=["stakeholder", "sentiment", "sentiment_category"]
+        )
+        .properties(width=350, height=350)
     )
-    .properties(width=350, height=350)
-)
-
-st.altair_chart(pie_chart, use_container_width=False)
+    st.altair_chart(pie_chart, use_container_width=False)
 
 # -------------------------------------------------
-# Simple Interaction Element
+# Small End Interaction
 # -------------------------------------------------
 st.markdown("---")
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("Done Exploring 🎉"):
-        st.balloons()
+if st.button("Done Exploring 🎉"):
+    st.balloons()
