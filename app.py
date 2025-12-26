@@ -3,18 +3,12 @@ import pandas as pd
 import altair as alt
 from pathlib import Path
 
-# -------------------------------------------------
-# Page Setup
-# -------------------------------------------------
 st.set_page_config(
     page_title="Shifting Narratives",
     page_icon="🌍",
     layout="centered"
 )
-
-# -------------------------------------------------
-# Data Loading
-# -------------------------------------------------
+#data loading
 data_path = Path("data/events.csv")
 
 if data_path.exists():
@@ -67,9 +61,9 @@ else:
 
 df["date"] = pd.to_datetime(df["date"])
 
-# -------------------------------------------------
-# Sentiment Categorization
-# -------------------------------------------------
+
+#sentiment categorization
+
 def label_sentiment(s):
     if s > 0.05:
         return "Positive"
@@ -85,9 +79,7 @@ sentiment_color_scale = alt.Scale(
     range=["#2ca02c", "#7f7f7f", "#d62728"]
 )
 
-# -------------------------------------------------
-# Sidebar Controls
-# -------------------------------------------------
+#sidebar controls
 st.sidebar.header("Controls")
 
 event = st.sidebar.selectbox(
@@ -107,9 +99,9 @@ mood_adjust = st.sidebar.slider(
 
 comparison_mode = st.sidebar.checkbox("Enable Comparison Mode")
 
-# -------------------------------------------------
-# Filter Event Data
-# -------------------------------------------------
+
+#filter event data
+
 event_df = df[df["event_name"] == event].copy()
 event_df["sentiment"] = event_df["sentiment"] + mood_adjust
 event_df["sentiment_category"] = event_df["sentiment"].apply(label_sentiment)
@@ -122,9 +114,7 @@ else:
 row_sentiment = float(row["sentiment"])
 row_category = label_sentiment(row_sentiment)
 
-# -------------------------------------------------
-# Title + Summary
-# -------------------------------------------------
+#title + summary
 st.title("Shifting Narratives")
 st.subheader(f"{stakeholder_choice} Perspective On “{event}”")
 
@@ -159,9 +149,8 @@ st.markdown(
 """
 )
 
-# -------------------------------------------------
-# Time Chart (All Events)
-# -------------------------------------------------
+
+#time chart (All Events)
 st.markdown("### Sentiment Over Time (All Events)")
 
 time_chart = (
@@ -177,9 +166,9 @@ time_chart = (
 
 st.altair_chart(time_chart, use_container_width=True)
 
-# -------------------------------------------------
-# Comparison Mode
-# -------------------------------------------------
+
+#comparison made
+
 if comparison_mode:
 
     st.markdown("### Sentiment Comparison For Selected Event")
@@ -198,9 +187,7 @@ if comparison_mode:
 
     st.altair_chart(bar_chart, use_container_width=True)
 
-    # -------------------------------------------------
     # NEW CHART: Convert Sentiment Weight Into Percentages
-    # -------------------------------------------------
     st.markdown("### Overall Emotional Weight")
 
     weight_df = event_df.copy()
@@ -240,9 +227,8 @@ if comparison_mode:
         unsafe_allow_html=True
     )
 
-# -------------------------------------------------
-# End Interaction
-# -------------------------------------------------
+
+#end interaction
 st.markdown("---")
 if st.button("Done Exploring 🎉"):
     st.balloons()
